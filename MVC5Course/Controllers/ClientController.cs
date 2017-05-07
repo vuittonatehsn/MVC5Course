@@ -10,108 +10,125 @@ using MVC5Course.Models;
 
 namespace MVC5Course.Controllers
 {
-    public class ProductsController : Controller
+    [Bind(Exclude = "Note")]
+    public class 會員Controller : Controller
     {
         private FabricsEntities db = new FabricsEntities();
 
-        // GET: Products
-        public ActionResult Index(bool? active = true)
+        
+        // GET: 會員
+        public ActionResult Index()
         {
-            var queryable = db.Product.Where(r=>r.Active.HasValue & r.Active==active).OrderByDescending(x => x.ProductId).Take(10);
-            return View(queryable);
+            var client = db.Client.Include(c => c.Occupation);
+            return View(client.Take(10));
         }
 
-        // GET: Products/Details/5
-        public ActionResult Details(int? id = 133)
+        public ActionResult Detail2()
+        {
+            var client = db.Client.Select(w=> new ClientViewMOdel
+            {
+                firstName= w.FirstName,
+                Gender = w.Gender
+            });
+            return View(client.Take(10));
+        }
+
+
+        // GET: 會員/Details/5
+        public ActionResult 資料Details(int? id = 1)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Product.Find(id);
-            if (product == null)
+            Client client = db.Client.Find(id);
+            if (client == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(client);
         }
 
-        // GET: Products/Create
+        // GET: 會員/Create
         public ActionResult Create()
         {
+            ViewBag.OccupationId = new SelectList(db.Occupation, "OccupationId", "OccupationName");
             return View();
         }
 
-        // POST: Products/Create
+        // POST: 會員/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductId,ProductName,Price,Active,Stock")] Product product)
+        public ActionResult Create([Bind(Include = "ClientId,FirstName,MiddleName,LastName,Gender,DateOfBirth,CreditRating,XCode,OccupationId,TelephoneNumber,Street1,Street2,City,ZipCode,Longitude,Latitude,Notes")] Client client)
         {
             if (ModelState.IsValid)
             {
-                db.Product.Add(product);
+                db.Client.Add(client);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(product);
+            ViewBag.OccupationId = new SelectList(db.Occupation, "OccupationId", "OccupationName", client.OccupationId);
+            return View(client);
         }
 
-        // GET: Products/Edit/5
+        // GET: 會員/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Product.Find(id);
-            if (product == null)
+            Client client = db.Client.Find(id);
+            if (client == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            ViewBag.OccupationId = new SelectList(db.Occupation, "OccupationId", "OccupationName", client.OccupationId);
+            return View(client);
         }
 
-        // POST: Products/Edit/5
+        // POST: 會員/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductId,ProductName,Price,Active,Stock")] Product product)
+        public ActionResult Edit([Bind(Include = "ClientId,FirstName,MiddleName,LastName,Gender,DateOfBirth,CreditRating,XCode,OccupationId,TelephoneNumber,Street1,Street2,City,ZipCode,Longitude,Latitude,Notes")] Client client)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
+                db.Entry(client).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(product);
+            ViewBag.OccupationId = new SelectList(db.Occupation, "OccupationId", "OccupationName", client.OccupationId);
+            return View(client);
         }
 
-        // GET: Products/Delete/5
+        // GET: 會員/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Product.Find(id);
-            if (product == null)
+            Client client = db.Client.Find(id);
+            if (client == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(client);
         }
 
-        // POST: Products/Delete/5
+        // POST: 會員/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Product.Find(id);
-            db.Product.Remove(product);
+            Client client = db.Client.Find(id);
+            db.Client.Remove(client);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -123,23 +140,6 @@ namespace MVC5Course.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        //mvcaction
-
-        public ActionResult CreateProduct()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult CreateProduct(ProductViewModel productViewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                return RedirectToAction("Index");
-            }
-
-            return View();
         }
     }
 }

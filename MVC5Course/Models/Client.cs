@@ -36,6 +36,7 @@ namespace MVC5Course.Models
         public string ZipCode { get; set; }
         public Nullable<double> Longitude { get; set; }
         public Nullable<double> Latitude { get; set; }
+   
         public string Notes { get; set; }
     
         public virtual Occupation Occupation { get; set; }
