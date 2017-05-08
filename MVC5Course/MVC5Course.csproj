@@ -182,6 +182,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClientViewMOdel.cs" />
+    <Compile Include="Controllers\EFController.cs" />
     <Compile Include="Controllers\HelloController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -245,6 +246,7 @@
     </Compile>
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\RequireAttribute.cs" />
+    <Compile Include="Models\ValidationAttributes\商品名稱需要加Will字串Attribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -357,6 +359,10 @@
     <Content Include="Views\會員\Detail2.cshtml" />
     <Content Include="Views\會員\資料Details.cshtml" />
     <Content Include="Views\Products\CreateProduct.cshtml" />
+    <Content Include="Views\EF\Create.cshtml" />
+    <Content Include="Views\EF\edit.cshtml" />
+    <Content Include="Views\EF\Index.cshtml" />
+    <Content Include="Views\EF\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
