@@ -12,6 +12,7 @@ namespace MVC5Course.Controllers
         public ActionResult Index()
         {
             View("About").ExecuteResult(this.ControllerContext);//這時候就去執行About View 頁面
+            View("About").ExecuteResult(this.ControllerContext);
             var viewName = "About";
             string result;
             using (var sw = new StringWriter())
@@ -27,6 +28,23 @@ namespace MVC5Course.Controllers
             //return new ViewResult { };
             
             return View();
+        }
+        public ActionResult PartialView()
+        {
+            //在頁面用F12的Console去跑這段ajax語法call 這個method。 $.get('/Home/PartialView', function(data) {alert(data);});
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("About");
+            }else
+            {
+                return View("About");
+            }
+  
+        }
+
+        public ActionResult SomeAction()
+        {
+            return View("SuccessRedirect", "/");
         }
 
         public ActionResult About()
