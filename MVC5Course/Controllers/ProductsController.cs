@@ -19,9 +19,12 @@ namespace MVC5Course.Controllers
         {
             var queryable = repo.GetAll取得十筆資料(active, showAll: false);//很特別的用法showAll重頭到尾都沒有被new出來，這是.net的機制，叫做:具名參數
 
+            ViewData.Model = queryable;  //等於 View(queryable)
+                                         //var queryable = db.Product.Where(r=>r.Active.HasValue & r.Active==active).OrderByDescending(x => x.ProductId).Take(10);
 
-            //var queryable = db.Product.Where(r=>r.Active.HasValue & r.Active==active).OrderByDescending(x => x.ProductId).Take(10);
-            return View(queryable);
+            ViewBag.qqq = ""; //ViewBag 吃多4個byte than ViewData
+
+            return View();
         }
 
         // GET: Products/Details/5
@@ -146,6 +149,7 @@ namespace MVC5Course.Controllers
         {
             if (ModelState.IsValid)
             {
+                TempData["ProductResult"] = "商品成功拉拉";
                 return RedirectToAction("Index");
             }
 

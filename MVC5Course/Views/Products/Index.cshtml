@@ -10,6 +10,13 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+
+@if (@TempData["ProductResult"] != null)
+{
+    <h1>@TempData["ProductResult"]</h1>
+}
+
 <table class="table">
     <tr>
         <th>

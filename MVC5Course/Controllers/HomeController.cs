@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace MVC5Course.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public ActionResult Index()
         {
@@ -44,8 +44,22 @@ namespace MVC5Course.Controllers
 
         public ActionResult SomeAction()
         {
-            return PartialView("SuccessRedirect", "/");
+            return PartialView("SuccessRedirect", "/Home/SomeAction");
         }
+
+
+        public ActionResult GetFile()
+        {
+            return File(Server.MapPath("~/Content/download/build2017.jpg"), "image/png", "newName.jpg");
+        }
+
+        public ActionResult GetJson()
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+            return Json(this.db.Product.Take(2), JsonRequestBehavior.AllowGet);
+        }
+
+
 
         public ActionResult About()
         {
