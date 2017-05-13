@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<MVC5Course.Models.ProductViewModel>
 
+
+
+
+
 @{
     ViewBag.Title = "ListProduct";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,8 +17,8 @@
 </p>
 <form method="get">
     @Html.TextBox("searchKey")
-    @Html.TextBox("StockRangeStart")
-    @Html.TextBox("StockRangeEnd")
+    @Html.TextBox("stockRangeStart", null, new { size = "10", type = "number" })
+    @Html.TextBox("stockRangeEnd", null, new { size = "10", type = "number" })
 
     <input type="submit" value="搜尋" />
 </form>
@@ -36,6 +40,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Stock)
         </th>
+    
         <th></th>
     </tr>
 
