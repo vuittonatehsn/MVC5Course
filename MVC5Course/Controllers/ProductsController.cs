@@ -155,24 +155,26 @@ namespace MVC5Course.Controllers
 
             return View();
         }
-
+        //[AjaxOnly]
         public ActionResult ListProduct(SearchRequest model)
            //(string searchKey = "z", int? StockRangeStart= 0, int? StockRangeEnd = 99999)
         {
+            if (ModelState.IsValid) { 
             var data = repo.GetAll取得十筆資料(true);
-            var result = data.Where(w => w.ProductName.Contains(model.searchKey) 
-                                    && w.Stock > model.stockRangeStart
-                                    && w.Stock < model.stockRangeEnd).Select(w => new ProductViewModel
-            {
-                ProductName = w.ProductName,
-                Price = w.Price,
-                Active = w.Active,
-                Stock = w.Stock
+                ViewData.Model= data.Where(w => w.ProductName.Contains(model.searchKey) 
+                                        && w.Stock > model.stockRangeStart
+                                        && w.Stock < model.stockRangeEnd).Select(w => new ProductViewModel
+                {
+                    ProductName = w.ProductName,
+                    Price = w.Price,
+                    Active = w.Active,
+                    Stock = w.Stock
 
-            });
+                });
+                return View();
+            }
 
-
-            return View(result);
+            return RedirectToAction("ListProduct");
         }
 
 
