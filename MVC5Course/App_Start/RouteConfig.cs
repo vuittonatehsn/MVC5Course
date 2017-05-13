@@ -19,6 +19,20 @@ namespace MVC5Course
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "mvcDefault",
+                url: "{controller}/{*param}",
+                defaults: new { controller = "Home", action = "SelectPage", param = UrlParameter.Optional }
+            );
+
+            //瞬間變aspx 頁面，騙人用的
+            routes.MapRoute(
+               name: "aspxDefault",
+               url: "{controller}/{action}.aspx/{id}",
+               defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+           );
+
         }
     }
 }

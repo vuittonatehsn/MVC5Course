@@ -10,7 +10,7 @@ using MVC5Course.Models;
 
 namespace MVC5Course.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductsController : BaseController
     {
         //private FabricsEntities db = new FabricsEntities();
         private ProductRepository repo = RepositoryHelper.GetProductRepository();
@@ -32,7 +32,7 @@ namespace MVC5Course.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             //Product product = db.Product.Find(id);
-            Product product = repo.GetById(id);
+            Product product = repo.GetById(id.Value);
             
             if (product == null)
             {
@@ -74,7 +74,7 @@ namespace MVC5Course.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             //Product product = db.Product.Find(id);
-            Product product = repo.All().FirstOrDefault(r => r.ProductId == id);
+            Product product = repo.All().FirstOrDefault(r => r.ProductId == id.Value);
             if (product == null)
             {
                 return HttpNotFound();
@@ -133,14 +133,7 @@ namespace MVC5Course.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                //db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        
 
         //mvcaction
 
