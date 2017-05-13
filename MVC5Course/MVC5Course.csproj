@@ -400,6 +400,7 @@
     <Content Include="Views\EF\edit.cshtml" />
     <Content Include="Views\EF\Index.cshtml" />
     <Content Include="Views\EF\Details.cshtml" />
+    <Content Include="Views\Shared\SuccessRedirect.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -44,7 +44,7 @@ namespace MVC5Course.Controllers
 
         public ActionResult SomeAction()
         {
-            return View("SuccessRedirect", "/");
+            return PartialView("SuccessRedirect", "/");
         }
 
         public ActionResult About()
