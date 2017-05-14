@@ -90,14 +90,22 @@ namespace MVC5Course.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductId,ProductName,Price,Active,Stock")] Product product)
+        public ActionResult Edit(int id, FormCollection form)
         {
-            if (ModelState.IsValid)
+            var product = repo.GetById(id);
+            if (TryUpdateModel(product, new string[] { "ProductName", "Price" }))//model binding
             {
-                //db.Entry(product).State = EntityState.Modified;
-                //db.SaveChanges();
+                repo.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
+
+     
+            //if (ModelState.IsValid)
+            //{
+                //db.Entry(product).State = EntityState.Modified;
+                //db.SaveChanges();
+               
+            //}
             return View(product);
         }
 
@@ -159,24 +167,55 @@ namespace MVC5Course.Controllers
         public ActionResult ListProduct(SearchRequest model)
            //(string searchKey = "z", int? StockRangeStart= 0, int? StockRangeEnd = 99999)
         {
-            if (ModelState.IsValid) { 
-            var data = repo.GetAll取得十筆資料(true);
-                ViewData.Model= data.Where(w => w.ProductName.Contains(model.searchKey) 
-                                        && w.Stock > model.stockRangeStart
-                                        && w.Stock < model.stockRangeEnd).Select(w => new ProductViewModel
-                {
-                    ProductName = w.ProductName,
-                    Price = w.Price,
-                    Active = w.Active,
-                    Stock = w.Stock
+         
 
-                });
-                return View();
+            //return RedirectToAction("ListProduct");
+            
+            return View(GetProductListBySearch(model));
+        }
+        [HttpPost]
+        public ActionResult BatchUpdate(SearchRequest model, ProductBatchVM[] items)
+        {
+            if (ModelState.IsValid)
+            {
+                foreach (var s in items)
+                {
+                    var p = db.Product.Find(s.ProductId);
+                    p.Price = s.Price;
+                    p.Stock = s.Stock;
+                }
+                db.SaveChanges();
+                return RedirectToAction("ListProduct");
+
             }
 
-            return RedirectToAction("ListProduct");
+            IQueryable<ProductViewModel> resultData = GetProductListBySearch(model);
+
+            return View("ListProduct", resultData);
         }
 
+        private IQueryable<ProductViewModel> GetProductListBySearch(SearchRequest model)
+        {
+            var data = repo.GetAll取得十筆資料(true);
+            //if (ModelState.IsValid)
+            //{
+
+                data = data.Where(w => w.ProductName.Contains(model.searchKey)
+                                        && w.Stock > model.stockRangeStart
+                                        && w.Stock < model.stockRangeEnd);
+
+            //}
+
+            var resultData = data.Select(w => new ProductViewModel
+            {
+                ProductName = w.ProductName,
+                Price = w.Price,
+                Active = w.Active,
+                Stock = w.Stock
+
+            });
+            return resultData;
+        }
 
 
     }

@@ -15,58 +15,77 @@
     @Html.ActionLink("Create New", "Create")
 
 </p>
+
 <form method="get">
     @Html.TextBox("searchKey")
     @Html.TextBox("stockRangeStart", null, new { size = "10", type = "number" })
+    @*@Html.ValidationMessageFor("stockRangeStart", "", new { @class = "text-danger" })*@
     @Html.TextBox("stockRangeEnd", null, new { size = "10", type = "number" })
 
-    <input type="submit" value="搜尋" />
+    @*<input type="submit" value="搜尋" />*@
+    <button>搜尋</button>
 </form>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Active)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Stock)
-        </th>
-    
-        <th></th>
-    </tr>
+@*@using (Html.BeginForm())
+{*@
+    @using (Html.BeginForm("BatchUpdate", "Products", FormMethod.Post)) { 
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Active)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Stock)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductId)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.Active)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Stock)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @{
+            var items = Model.ToArray();
+            Console.Write(items);
+        }
+
+        @for (var i=0; i<items.Length; i++)
+        {
+            <tr>
+                @Html.HiddenFor(modelItem => items[i].ProductId)
+                @*<td>
+                    @Html.DisplayFor(modelItem => items[i].ProductId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => items[i].ProductName)
+                </td>*@
+                <td>
+                    @Html.EditorFor(modelItem => items[i].Price)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => items[i].Active)
+                </td>*@
+                <td>
+                    @Html.EditorFor(modelItem => items[i].Stock)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+
+
+    </table>
+    <button>Batch</button>
+
 }
-
-</table>
