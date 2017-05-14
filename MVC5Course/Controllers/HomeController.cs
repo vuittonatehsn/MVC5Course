@@ -88,5 +88,17 @@ namespace MVC5Course.Controllers
             throw new ArgumentException("Error Handled!!");
             //return View();
         }
+
+        public ActionResult VT()
+        {
+            ViewBag.IsEnabled = true;
+            return View();
+        }
+
+        public ActionResult VTest()
+        {
+            var data = new int[] { 1, 2, 3, 4, 5 };
+            return PartialView(data);
+        }
     }
 }
