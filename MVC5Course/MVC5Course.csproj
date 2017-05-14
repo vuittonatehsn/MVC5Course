@@ -183,6 +183,7 @@
     <Compile Include="Controllers\HelloController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MetroController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Attribute\SharedViewBagAttribute.cs" />
@@ -289,6 +290,31 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\download\build2017.jpg" />
+    <Content Include="css\bootstrap-responsive.css" />
+    <Content Include="css\bootstrap-responsive.min.css" />
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\chosen.css" />
+    <Content Include="css\elfinder.min.css" />
+    <Content Include="css\elfinder.theme.css" />
+    <Content Include="css\font-awesome-ie7.min.css" />
+    <Content Include="css\font-awesome.min.css" />
+    <Content Include="css\fullcalendar.css" />
+    <Content Include="css\glyphicons.css" />
+    <Content Include="css\halflings.css" />
+    <Content Include="css\ie.css" />
+    <Content Include="css\ie9.css" />
+    <Content Include="css\jquery-ui-1.8.21.custom.css" />
+    <Content Include="css\jquery.cleditor.css" />
+    <Content Include="css\jquery.gritter.css" />
+    <Content Include="css\jquery.iphone.toggle.css" />
+    <Content Include="css\jquery.noty.css" />
+    <Content Include="css\noty_theme_default.css" />
+    <Content Include="css\style-forms.css" />
+    <Content Include="css\style-responsive.css" />
+    <Content Include="css\style.css" />
+    <Content Include="css\uniform.default.css" />
+    <Content Include="css\uploadify.css" />
     <Content Include="favicon.ico" />
     <Content Include="file-manager.html" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -423,9 +449,15 @@
     <Content Include="Views\Shared\EntityError.cshtml" />
     <Content Include="Views\Home\VT.cshtml" />
     <Content Include="Views\Home\VTest.cshtml" />
+    <Content Include="Views\Metro\Index.cshtml" />
+    <Content Include="Views\Metro\_Layout.cshtml" />
+    <Content Include="Views\Metro\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="font\" />
+    <Folder Include="img\" />
+    <Folder Include="js\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
