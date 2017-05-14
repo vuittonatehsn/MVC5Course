@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVC5Course.Attribute;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -60,14 +61,15 @@ namespace MVC5Course.Controllers
         }
 
 
-
+        [SharedViewBag]
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            //ViewBag.Message = "Your application description page.";
 
             return View();
         }
 
+        [LocalOnly]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

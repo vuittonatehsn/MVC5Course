@@ -1,4 +1,5 @@
-﻿using MVC5Course.Models;
+﻿using MVC5Course.Attribute;
+using MVC5Course.Models;
 using System.Web.Mvc;
 
 namespace MVC5Course.Controllers
@@ -6,6 +7,8 @@ namespace MVC5Course.Controllers
     public abstract class BaseController: Controller
     {
         protected FabricsEntities db = new FabricsEntities();
+
+        [LocalOnly]
         public ActionResult Debug()
         {
             return Content("hi");

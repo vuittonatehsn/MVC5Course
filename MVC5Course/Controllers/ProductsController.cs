@@ -181,8 +181,8 @@ namespace MVC5Course.Controllers
                 foreach (var s in items)
                 {
                     var p = db.Product.Find(s.ProductId);
-                    p.Price = s.Price;
-                    p.Stock = s.Stock;
+                    p.Price = s.Price.Value;
+                    p.Stock = s.Stock.Value;
                 }
                 db.SaveChanges();
                 return RedirectToAction("ListProduct");
@@ -208,10 +208,12 @@ namespace MVC5Course.Controllers
 
             var resultData = data.Select(w => new ProductViewModel
             {
+                ProductId = w.ProductId,
                 ProductName = w.ProductName,
                 Price = w.Price,
                 Active = w.Active,
                 Stock = w.Stock
+                
 
             });
             return resultData;

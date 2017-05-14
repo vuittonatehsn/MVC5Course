@@ -36,9 +36,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.ProductId)
             </th>
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.ProductName)
-            </th>*@
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
@@ -57,22 +57,22 @@
             Console.Write(items);
         }
 
-        @for (var i=0; i<items.Length; i++)
+        @for (var i = 0; i < items.Length; i++)
         {
             <tr>
                 @Html.HiddenFor(modelItem => items[i].ProductId)
-                @*<td>
+                <td>
                     @Html.DisplayFor(modelItem => items[i].ProductId)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => items[i].ProductName)
-                </td>*@
+                </td>
                 <td>
                     @Html.EditorFor(modelItem => items[i].Price)
                 </td>
                 @*<td>
-                    @Html.DisplayFor(modelItem => items[i].Active)
-                </td>*@
+                        @Html.DisplayFor(modelItem => items[i].Active)
+                    </td>*@
                 <td>
                     @Html.EditorFor(modelItem => items[i].Stock)
                 </td>
