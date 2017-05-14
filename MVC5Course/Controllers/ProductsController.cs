@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVC5Course.Models;
+using System.Data.Entity.Validation;
 
 namespace MVC5Course.Controllers
 {
@@ -15,6 +16,8 @@ namespace MVC5Course.Controllers
         //private FabricsEntities db = new FabricsEntities();
         private ProductRepository repo = RepositoryHelper.GetProductRepository();
         // GET: Products
+
+        [OutputCache(Duration = 50)]
         public ActionResult Index(bool? active = true)
         {
             var queryable = repo.GetAll取得十筆資料(active, showAll: false);//很特別的用法showAll重頭到尾都沒有被new出來，這是.net的機制，叫做:具名參數
@@ -55,10 +58,12 @@ namespace MVC5Course.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public ActionResult Create([Bind(Include = "ProductId,ProductName,Price,Active,Stock")] Product product)
         {
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)//拿掉測試Entity錯誤時兔出道頁面
             {
+                //throw new DbEntityValidationException("hihi it is time to pee!");
                 repo.Add(product);
                 repo.UnitOfWork.Commit();
                 //db.Product.Add(product);

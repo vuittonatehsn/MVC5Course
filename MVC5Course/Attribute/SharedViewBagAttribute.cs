@@ -4,7 +4,7 @@ using System.Web.Mvc;
 
 namespace MVC5Course.Controllers
 {
-    public class SharedViewBagAttribute : ActionFilterAttribute
+    public class SharedViewBagAttribute : ActionFilterAttribute, IExceptionFilter
     {
         public string MyProperty { get; set; }
 
@@ -18,5 +18,9 @@ namespace MVC5Course.Controllers
             base.OnActionExecuted(filterContext);
         }
 
+        public void OnException(ExceptionContext filterContext)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

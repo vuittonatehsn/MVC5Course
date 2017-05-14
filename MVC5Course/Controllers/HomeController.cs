@@ -1,6 +1,8 @@
 ﻿using MVC5Course.Attribute;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -69,17 +71,22 @@ namespace MVC5Course.Controllers
             return View();
         }
 
-        [LocalOnly]
+        //[LocalOnly]
+        [HandleError(ExceptionType= typeof(DbUpdateException), View = "SqlError")]
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            throw new DbUpdateException("hihi it is time to pee!");
+            //ViewBag.Message = "Your contact page.";
+            //throw new Exception("testing");
+            //throw new ArgumentException("Error Handled!!");
 
-            return View();
+            //return View();
         }
 
         public ActionResult Test()
         {
-            return View();
+            throw new ArgumentException("Error Handled!!");
+            //return View();
         }
     }
 }

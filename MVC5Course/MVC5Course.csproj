@@ -276,7 +276,6 @@
     <Compile Include="Models\RepositoryHelper.cs">
       <DependentUpon>IRepository.EF6..tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RequireAttribute.cs" />
     <Compile Include="Models\SearchRequest.cs" />
     <Compile Include="Models\ValidationAttributes\商品名稱需要加Will字串Attribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -402,6 +401,8 @@
     <Content Include="Views\EF\Details.cshtml" />
     <Content Include="Views\Shared\SuccessRedirect.cshtml" />
     <Content Include="Views\Products\ListProduct.cshtml" />
+    <Content Include="Views\Shared\SqlError.cshtml" />
+    <Content Include="Views\Shared\EntityError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
