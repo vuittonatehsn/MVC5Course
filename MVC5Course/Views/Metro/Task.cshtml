@@ -4,6 +4,12 @@
     Layout = "~/Views/Metro/_Layout.cshtml";
 }
 
+@if (IsAjax)
+{
+    Layout = "";
+}
+
+
 @section breadcrumb {
         <li><a href="@Url.Action("Task", "Metro")">Tasks</a></li>
     }

@@ -115,10 +115,14 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ClientId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ClientId }) |
+            @Html.ActionLink("資料Details", "資料Details", new { id=item.ClientId }) |
+            @Html.ActionLink("Details2", "Details2", new { id = item.ClientId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.ClientId })
         </td>
     </tr>
+
+
+
 }
 
 </table>
