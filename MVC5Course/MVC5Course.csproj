@@ -180,6 +180,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ClientViewMOdel.cs" />
     <Compile Include="Controllers\EFController.cs" />
+    <Compile Include="Controllers\FormController.cs" />
     <Compile Include="Controllers\HelloController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -461,6 +462,16 @@
     <Content Include="Views\Orders\Edit.cshtml" />
     <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\會員\資料Details.Mobile.cshtml" />
+    <Content Include="Views\Form\Edit.cshtml" />
+    <Content Include="Views\Form\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Client.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Client.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DateOnly.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CreditRating.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Gender.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\GoogleMapDisplay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

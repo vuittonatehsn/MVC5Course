@@ -49,5 +49,8 @@ namespace MVC5Course.Models
         [Range(-444, 1000, ErrorMessage = "Enter right number")]
         public Nullable<decimal> Stock { get; set; }
         public virtual ICollection<OrderLine> OrderLine { get; set; }
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime CreatedOn { get; set; }
     }
 }

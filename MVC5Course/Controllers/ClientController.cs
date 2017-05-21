@@ -17,9 +17,27 @@ namespace MVC5Course.Controllers
 
         
         // GET: 會員
-        public ActionResult Index()
+        public ActionResult Index(int rateList = -1, string lastNameList = "")
         {
-            var client = db.Client.Include(c => c.Occupation);
+            var rateList1 = (from p in db.Client
+                              select p.CreditRating ).Distinct().OrderBy(e => e).ToList();
+            var lastNameList1 = (from p in db.Client
+                              select p.LastName).Distinct().OrderBy(e => e).ToList();
+
+            ViewBag.rateList = new SelectList(rateList1);
+            ViewBag.lastNameList = new SelectList(lastNameList1);
+            //var client = db.Client.Include(c => c.Occupation);
+            var client = db.Client.AsQueryable();
+            
+            if (rateList >= 0)
+                {
+                client = client.Where(p => p.CreditRating == rateList);
+                }
+            if (!String.IsNullOrEmpty(lastNameList))
+                {
+                client = client.Where(p => p.LastName == lastNameList);
+             }
+
             return View(client.Take(10));
         }
 
@@ -86,7 +104,9 @@ namespace MVC5Course.Controllers
             {
                 return HttpNotFound();
             }
+            var rateList1 = new double[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
             ViewBag.OccupationId = new SelectList(db.Occupation, "OccupationId", "OccupationName", client.OccupationId);
+            ViewBag.CreditRating = new SelectList(rateList1, client.CreditRating);
             return View(client);
         }
 

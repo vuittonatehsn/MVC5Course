@@ -53,28 +53,28 @@
         </tr>
 
         @{
-            var items = Model.ToArray();
-            Console.Write(items);
+            var ProductList = Model.ToArray();
+            Console.Write(ProductList);
         }
 
-        @for (var i = 0; i < items.Length; i++)
+        @for (var i = 0; i < ProductList.Length; i++)
         {
             <tr>
-                @Html.HiddenFor(modelItem => items[i].ProductId)
+                @Html.HiddenFor(modelItem => ProductList[i].ProductId)
                 <td>
-                    @Html.DisplayFor(modelItem => items[i].ProductId)
+                    @Html.DisplayFor(modelItem => ProductList[i].ProductId)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => items[i].ProductName)
+                    @Html.DisplayFor(modelItem => ProductList[i].ProductName)
                 </td>
                 <td>
-                    @Html.EditorFor(modelItem => items[i].Price)
+                    @Html.EditorFor(modelItem => ProductList[i].Price)
                 </td>
                 @*<td>
                         @Html.DisplayFor(modelItem => items[i].Active)
                     </td>*@
                 <td>
-                    @Html.EditorFor(modelItem => items[i].Stock)
+                    @Html.EditorFor(modelItem => ProductList[i].Stock)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

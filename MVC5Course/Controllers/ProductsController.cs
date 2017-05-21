@@ -179,11 +179,11 @@ namespace MVC5Course.Controllers
             return View(GetProductListBySearch(model));
         }
         [HttpPost]
-        public ActionResult BatchUpdate(SearchRequest model, ProductBatchVM[] items)
+        public ActionResult BatchUpdate(SearchRequest model, ProductBatchVM[] ProductList)
         {
             if (ModelState.IsValid)
             {
-                foreach (var s in items)
+                foreach (var s in ProductList)
                 {
                     var p = db.Product.Find(s.ProductId);
                     p.Price = s.Price.Value;
@@ -223,6 +223,8 @@ namespace MVC5Course.Controllers
             });
             return resultData;
         }
+
+
 
 
     }
