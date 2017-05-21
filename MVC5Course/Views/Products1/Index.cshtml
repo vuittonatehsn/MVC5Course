@@ -1,8 +1,13 @@
 ﻿@model IEnumerable<MVC5Course.Models.Product>
+@using PagedList
+@using PagedList.Mvc
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (IsAjax)
+    {
+        Layout = "";
+    }
 }
 
 <h2>Index</h2>
@@ -10,13 +15,6 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-
-
-@if (@TempData["ProductResult"] != null)
-{
-    <h1>@TempData["ProductResult"]</h1>
-}
-
 <table class="table">
     <tr>
         <th>
@@ -31,6 +29,12 @@
         <th>
             @Html.DisplayNameFor(model => model.Stock)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </th>
         <th></th>
     </tr>
 
@@ -41,22 +45,22 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Price)
-            @*@String.Format("{0:00}", item.Price)*@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Active)
-            
-            @*@Html.RadioButtonFor(modelItem => item.Active, "True")*@
-          
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Stock)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.IsDeleted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedOn)
+        </td>
+        <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ProductId }) |
-            @*@Html.ActionLink("Details", "Details", new { id=item.ProductId }) |*@
-            @Ajax.ActionLink("Details", "Details", new { id = item.ProductId }, new AjaxOptions() { UpdateTargetId = "Details" })
-            
+            @Html.ActionLink("Details", "Details", new { id=item.ProductId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.ProductId })
         </td>
     </tr>
@@ -64,6 +68,10 @@
 
 </table>
 
-<div id="Details">
+@Html.PagedListPager(
+    Model as IPagedList,
+    (p) => Url.Action("Index", new {
+        pageNo = p
+    }),
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing("#Main"))
 
-</div> 

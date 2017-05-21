@@ -1,9 +1,15 @@
 ﻿@model IEnumerable<MVC5Course.Models.Client>
-
+@using PagedList; 
+@using PagedList.Mvc;
+   
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
+    if (IsAjax)
+    {
+        Layout = "";
+    }
+    }
 
 <h2>Index</h2>
 
@@ -15,7 +21,7 @@
         @Html.DropDownList("lastNameList", "選用姓")
         <input type="submit" value="執行篩選" />
     </p>
-    }   
+    }
     <table class="table">
         <tr>
             <th>
@@ -133,3 +139,28 @@
         }
 
     </table>
+
+@*@Html.PagedListPager(  Model as IPagedList, (p) => Url.Action("Index", 
+    new { pageNo = p
+        , rateList = @Html.Value("rateList")
+        , lastNameList = @Html.Value("lastNameList")
+}))*@
+
+
+@*@Html.PagedListPager(Model as IPagedList, (p) => Url.Action("Index",
+  new ClientIndexViewModel
+  {
+      pageNo = p
+      , rateList = Html.Value("rateList")
+      , lastNameList = Html.Value("lastNameList").ToString()
+  }))*@
+
+@Html.PagedListPager(
+    Model as IPagedList,
+    (p) => Url.Action("Index", new
+    {
+        pageNo = p,
+        CreditRatingFilter = Html.Value("CreditRatingFilter"),
+        LastNameFilter = Html.Value("LastNameFilter")
+    }),
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing("#Main"))
